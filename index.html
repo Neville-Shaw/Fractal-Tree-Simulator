@@ -1,0 +1,252 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+
+  <!-- Script references -->
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="branch.js"></script>
+  <script language="javascript" type="text/javascript" src="L-System.js"></script>
+  <script language="javascript" type="text/javascript" src="interface.js"></script>
+  <style>
+    
+    .canvas {
+      
+      position: relative;
+      margin: auto;
+      text-align: center;
+    }
+    .wrapper {
+      
+      position: relative;
+      width:1000px; 
+      margin-top: 300;
+      text-align: center; 
+      margin: auto;
+      
+    }
+    .info {
+      color: #868686;
+      visibility: visible;
+      font-size: 20px;
+      position: absolute;
+      display: outside;
+      text-align: left;
+      
+      margin-left: 110;
+      margin-top: 10;
+      font-family: Helvetica, sans-serif;
+
+      float: right; 
+    }
+    .controls {
+      visibility: visible;
+      font-size: 20px;
+      position: absolute;
+      display: outside;
+      text-align: left;
+      
+      margin-left: 900;
+      font-family: Helvetica, sans-serif;
+
+      float: right; 
+      width: 35%;
+      padding: 10px;
+    }
+    .showInfoButton {
+      
+      font-size: 20px;
+      position: absolute;
+
+      display: outside;
+      text-align: left;
+      
+      margin-left: 854;
+      margin-top: 781;
+      font-family: Helvetica, sans-serif;
+
+      float: right; 
+    }
+    .showControlsButton {
+      font-size: 20px;
+      position: absolute;
+
+      display: outside;
+      text-align: left;
+      
+      margin-left: 726;
+      margin-top: -6;
+      font-family: Helvetica, sans-serif;
+
+      float: right; 
+    }
+    .ButtonStatus {
+      font-size: 20px;
+      position: absolute;
+      
+      text-align: center;
+      
+      margin-left: 205;
+      margin-top: 740;
+      font-family: Helvetica, sans-serif;
+    }
+    .AutoGenerateStatus {
+      position: absolute;
+      margin-left: 100;
+    }
+    .ToggleSteppingStatus {
+      position: absolute;
+      margin-left: 207;
+    }
+    .Buttons {
+      
+      font-size: 15px;
+      position: absolute;
+      
+      
+      
+      margin-left: 100;
+      margin-top: 781;
+      font-family: Helvetica, sans-serif;
+
+      
+      
+      float: right; 
+
+      transition-duration: 0.3s;
+      border: #494949;
+      border-radius: 4px;
+      color: rgb(150, 150, 150);
+
+      background-color: #474747;
+     
+      outline: none;
+    }
+    .Button1 {
+      transition-duration: 0.3s;
+      border: #494949;
+      border-radius: 4px;
+      color: rgb(150, 150, 150);
+
+      background-color: #474747;
+     
+      outline: none;
+
+    }
+    .Button1:hover {
+      color: rgb(173, 173, 173);
+      border: #616161;
+      border-radius: 5px;
+      
+    }
+
+    .canvas {
+      margin: auto;
+      text-align: center;
+      
+    }
+
+    .display {
+      visibility: visible;
+      display: outside;
+    }
+
+    </style>
+</head>
+
+<body>
+  
+  <div>
+    <div class="wrapper">
+      <div id="canvascontainer"class="canvas">
+
+        <!-- Script references -->
+        <script src="branch.js"></script>
+        <script src="L-System.js"></script>
+        <script src="sketch.js"></script>
+
+        <div class="display" id="display">
+          
+            <div class="ButtonStatus">
+            <p id="AutoGenerateStatus"class="AutoGenerateStatus" >off</p>
+            <p id="ToggleSteppingStatus" class="ToggleSteppingStatus" >off</p>
+            <p id="RainbowStatus">off</p>
+            </div>
+
+          <div class="info" id="infoID">
+            <div class = "showControlsButton">
+              <button id="showControls" class="button1">Controls</button><br/>
+            </div>
+
+            RotationR: <span id="rotationR">0</span> <br/>
+            RotationL: <span id="rotationL">0</span> <br/>
+            <br/>
+            Grow Speed: <span id="growSpeed">0</span> <br/> 
+            Branch Length: <span id="branchLength">0</span><br/> 
+            Branch Weight: <span id="strokeWeight">0</span><br/> 
+            <br/> 
+            BLS: <span id="shrinkRate">0</span><br/> 
+            WSR: <span id="weightShrink">0</span><br/> 
+            
+          </div>
+
+          <div class="controls" id="Controls">
+          
+            L = Create Leaves <br/>
+            K = Reset Leaves <br/>
+            M = Reset Scene <br/>
+            <br/>
+            T = Toggle Stepping <br/>
+            H = Toggle Info <br/>
+            C = Toggle Controls <br/>
+            Space = Hide Display <br/>
+            <br/>
+            B = Generate Branch <br/>
+            R = Rainbow Tree <br/>
+            A = Auto Generate <br/>
+            <br/>
+            G = Create New Tree <br/>
+            <br/>
+
+            Alter Tree Properties: <br/>
+            1/2 = GrowSpeed <br/>
+            3/4 = BranchWeight <br/>
+            5/6 = Branch Starting Length <br/>
+            7/8 = Branch Length Shrink Rate <br/>
+            9/0 = Branch Weight Shrink Rate <br/>
+            <br/>
+            Q = Randomize All Values <br/>
+            W = Reset Values
+            
+          </div>
+
+
+
+          <div id="Buttons" class = "Buttons">
+            <button id="Generate" class = "Button1">Generate</button>
+            <button id="Rainbow" class = "Button1">Rainbow Tree</button>
+            <button id="AutoGenerate" class = "Button1">Auto Generate</button>
+            <button id="Stepping" class = "Button1">Toggle Stepping</button><br/>
+
+          </div>
+
+          <div class = "showInfoButton">
+            <button id="showInfo" class="button1">Show</button><br/>
+          </div>
+          
+
+        </div>
+      </div>
+        
+  
+      
+    </div>
+    
+    
+  </div>
+    
+  
+  
+</body>
+</html>
